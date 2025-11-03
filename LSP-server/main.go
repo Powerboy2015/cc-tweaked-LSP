@@ -14,7 +14,7 @@ type handler struct {
 	logger *zap.Logger
 }
 
-// The three functions below have been added as a sort of interface by the protocol.Server
+// All functions below have been added as a sort of interface by the protocol.Server
 // and all that we are doing is adding the implementation of the behaviour that we want from
 // them when they are called by the client.
 func (h *handler) Initialize(ctx context.Context, params *protocol.InitializeParams) (*protocol.InitializeResult, error) {
@@ -34,6 +34,7 @@ func (h *handler) Initialize(ctx context.Context, params *protocol.InitializePar
 				ResolveProvider:   false,
 			},
 		},
+		// sends the clients information about the LSP name and version.
 		ServerInfo: &protocol.ServerInfo{
 			Name:    "CC-Tweaked LSP",
 			Version: "0.0.1",
@@ -49,6 +50,17 @@ func (h *handler) Initialized(ctx context.Context, params *protocol.InitializedP
 func (h *handler) Shutdown(ctx context.Context) error {
 	h.logger.Info("Shutdown called")
 	return nil
+}
+
+func (h *handler) Completion(ctx context.Context, params *protocol.CompletionParams) (*protocol.CompletionList, error) {
+	h.logger.Info("Completion called", zap.Any("params", params))
+
+	items := GetCompletionItems()
+
+	return &protocol.CompletionList{
+		IsIncomplete: false,
+		Items:        items,
+	}, nil
 }
 
 // This struct and functions allows us to use os.Stdin and os.Stdout as a jsonrpc2 stream.
