@@ -11,7 +11,8 @@ import (
 
 type handler struct {
 	protocol.Server
-	logger *zap.Logger
+	logger    *zap.Logger
+	documents map[protocol.DocumentURI]string
 }
 
 // All functions below have been added as a sort of interface by the protocol.Server
@@ -52,6 +53,27 @@ func (h *handler) Shutdown(ctx context.Context) error {
 	return nil
 }
 
+func (h *handler) DidOpen(ctx context.Context, params *protocol.DidOpenTextDocumentParams) error {
+	h.logger.Info("Document opened", zap.String("uri", string(params.TextDocument.URI)))
+	h.documents[params.TextDocument.URI] = params.TextDocument.Text
+	return nil
+}
+
+func (h *handler) DidChange(ctx context.Context, params *protocol.DidChangeTextDocumentParams) error {
+	h.logger.Info("Document changed", zap.String("uri", string(params.TextDocument.URI)))
+	if len(params.ContentChanges) > 0 {
+		// Since we use TextDocumentSyncKindFull, we get the full document content
+		h.documents[params.TextDocument.URI] = params.ContentChanges[0].Text
+	}
+	return nil
+}
+
+func (h *handler) DidClose(ctx context.Context, params *protocol.DidCloseTextDocumentParams) error {
+	h.logger.Info("Document closed", zap.String("uri", string(params.TextDocument.URI)))
+	delete(h.documents, params.TextDocument.URI)
+	return nil
+}
+
 func (h *handler) Completion(ctx context.Context, params *protocol.CompletionParams) (*protocol.CompletionList, error) {
 	h.logger.Info("Completion called", zap.Any("params", params))
 
@@ -86,7 +108,10 @@ func main() {
 	// Note that our handler object here is an instance of a procotol.Server that has a logger attached to it.
 	// This means that any method that the server can sent is already set up due to the protocol.Server struct.
 	// We have added the logger for our handling of the methods.
-	ctx, conn, server := protocol.NewServer(context.Background(), &handler{logger: logger}, stream, logger)
+	ctx, conn, server := protocol.NewServer(context.Background(), &handler{
+		logger:    logger,
+		documents: make(map[protocol.DocumentURI]string),
+	}, stream, logger)
 	if server == nil {
 		logger.Fatal("failed to create server")
 	}
