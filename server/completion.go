@@ -6,38 +6,11 @@ import (
 
 	"go.lsp.dev/protocol"
 	"go.uber.org/zap"
+	jsonparser "zochi.space/cc-tweaked/jsonParser"
 	"zochi.space/cc-tweaked/utils"
 )
 
-var completionItems = []protocol.CompletionItem{
-	{
-		Label:            "print",
-		Kind:             protocol.CompletionItemKindFunction,
-		Detail:           "print(text: string): nil",
-		Documentation:    "Prints a message to the console",
-		InsertText:       "print(${1:text})$0",
-		InsertTextFormat: protocol.InsertTextFormatSnippet,
-		SortText:         "!print", // Changed to !
-	},
-	{
-		Label:  "term.print",
-		Kind:   protocol.CompletionItemKindFunction,
-		Detail: "term.print(text: string): nil",
-		Documentation: &protocol.MarkupContent{
-			Kind:  protocol.Markdown,
-			Value: "Prints a message to the terminal.",
-		},
-		InsertText:       "print(${1:text})$0",
-		InsertTextFormat: protocol.InsertTextFormatSnippet,
-		SortText:         "!print", // Changed to ! (this was still "0print")
-	},
-	{
-		Label:    "term",
-		Kind:     protocol.CompletionItemKindModule,
-		Detail:   "the terminal module that is used for all computers in computercraft",
-		SortText: "!term", // Changed to !
-	},
-}
+var completionItems []protocol.CompletionItem
 
 func (h *handler) Completion(ctx context.Context, params *protocol.CompletionParams) (*protocol.CompletionList, error) {
 	h.logger.Info("Completion called", zap.Any("params", params))
@@ -76,6 +49,14 @@ func (h *handler) Completion(ctx context.Context, params *protocol.CompletionPar
 		Items:        items,
 	}, nil
 
+}
+
+func InitCompletionList() {
+	apis, err := jsonparser.LoadAPIs()
+	if err != nil {
+		panic("Failed to load APIs: " + err.Error())
+	}
+	completionItems = jsonparser.BuildCompletionItems(apis)
 }
 
 func GetCompletionItems(text string) []protocol.CompletionItem {

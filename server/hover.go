@@ -96,43 +96,34 @@ func getHoverInfo(word string) *protocol.Hover {
 }
 
 func createHoverFromItem(item protocol.CompletionItem) *protocol.Hover {
-	var content strings.Builder
-
-	// Start with the signature from Detail
-	if item.Detail != "" {
-		content.WriteString("```lua\n")
-		content.WriteString(item.Detail)
-		content.WriteString("\n```\n\n")
-	}
-
-	// Add the documentation
+	// Check if documentation exists
 	if item.Documentation != nil {
 		if markupContent, ok := item.Documentation.(*protocol.MarkupContent); ok {
-			// Skip the code block in documentation since we already added it from Detail
-			docValue := markupContent.Value
-			// Remove the first code block if it exists in documentation
-			if strings.HasPrefix(docValue, "```lua\n") {
-				// Find the end of the first code block
-				endOfCodeBlock := strings.Index(docValue[8:], "```")
-				if endOfCodeBlock != -1 {
-					// Skip past the code block and the following newlines
-					docValue = strings.TrimLeft(docValue[8+endOfCodeBlock+3:], "\n")
-				}
+			return &protocol.Hover{
+				Contents: protocol.MarkupContent{
+					Kind:  protocol.Markdown,
+					Value: markupContent.Value,
+				},
 			}
-			content.WriteString(docValue)
 		} else if strDoc, ok := item.Documentation.(string); ok {
-			content.WriteString(strDoc)
+			return &protocol.Hover{
+				Contents: protocol.MarkupContent{
+					Kind:  protocol.Markdown,
+					Value: strDoc,
+				},
+			}
 		}
 	}
 
-	if content.Len() == 0 {
-		return nil
+	// Fallback to Detail if no Documentation
+	if item.Detail != "" {
+		return &protocol.Hover{
+			Contents: protocol.MarkupContent{
+				Kind:  protocol.Markdown,
+				Value: "```lua\n" + item.Detail + "\n```",
+			},
+		}
 	}
 
-	return &protocol.Hover{
-		Contents: protocol.MarkupContent{
-			Kind:  protocol.Markdown,
-			Value: content.String(),
-		},
-	}
+	return nil
 }

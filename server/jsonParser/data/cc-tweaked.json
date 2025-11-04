@@ -1,0 +1,150 @@
+{
+    "modules": [
+        {
+            "name": "term",
+            "kind": "module",
+            "description": "The terminal module for all computers in ComputerCraft.",
+            "documentation": "Provides functions for:\n- Writing text to the screen\n- Clearing the screen\n- Setting colors\n- Cursor manipulation",
+            "functions": [
+                {
+                    "name": "print",
+                    "signature": "term.print(text: string): nil",
+                    "description": "Prints a message to the terminal.",
+                    "parameters": [
+                        {
+                            "name": "text",
+                            "type": "string",
+                            "description": "The text to print"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "term.print(\"Hello from terminal\")"
+                },
+                {
+                    "name": "clear",
+                    "signature": "term.clear(): nil",
+                    "description": "Clears the terminal screen.",
+                    "parameters": [],
+                    "returns": [],
+                    "example": "term.clear()"
+                },
+                {
+                    "name": "setCursorPos",
+                    "signature": "term.setCursorPos(x: number, y: number): nil",
+                    "description": "Sets the cursor position on the terminal.",
+                    "parameters": [
+                        {
+                            "name": "x",
+                            "type": "number",
+                            "description": "The x coordinate (1-based)"
+                        },
+                        {
+                            "name": "y",
+                            "type": "number",
+                            "description": "The y coordinate (1-based)"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "term.setCursorPos(1, 1)"
+                },
+                {
+                    "name": "getCursorPos",
+                    "signature": "term.getCursorPos(): number, number",
+                    "description": "Returns the current cursor position as x, y coordinates.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "x",
+                            "type": "number",
+                            "description": "The x coordinate"
+                        },
+                        {
+                            "name": "y",
+                            "type": "number",
+                            "description": "The y coordinate"
+                        }
+                    ],
+                    "example": "local x, y = term.getCursorPos()\nprint(\"Cursor at: \" .. x .. \", \" .. y)"
+                }
+            ]
+        },
+        {
+            "name": "turtle",
+            "kind": "module",
+            "description": "The turtle API for controlling turtles in ComputerCraft.",
+            "documentation": "Provides functions for:\n- Movement (forward, back, up, down)\n- Rotation (turnLeft, turnRight)\n- Block interaction (dig, place, drop)\n- Inventory management",
+            "functions": [
+                {
+                    "name": "forward",
+                    "signature": "turtle.forward(): boolean, string?",
+                    "description": "Moves the turtle forward one block.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "success",
+                            "type": "boolean",
+                            "description": "true if successful, false otherwise"
+                        },
+                        {
+                            "name": "reason",
+                            "type": "string",
+                            "optional": true,
+                            "description": "Error message if failed"
+                        }
+                    ],
+                    "example": "if turtle.forward() then\n  print(\"Moved forward\")\nelse\n  print(\"Blocked\")\nend"
+                },
+                {
+                    "name": "back",
+                    "signature": "turtle.back(): boolean, string?",
+                    "description": "Moves the turtle backward one block.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "success",
+                            "type": "boolean",
+                            "description": "true if successful, false otherwise"
+                        },
+                        {
+                            "name": "reason",
+                            "type": "string",
+                            "optional": true,
+                            "description": "Error message if failed"
+                        }
+                    ],
+                    "example": "turtle.back()"
+                }
+            ]
+        }
+    ],
+    "globals": [
+        {
+            "name": "print",
+            "signature": "print(text: string): nil",
+            "description": "Prints a message to the console with a newline.",
+            "parameters": [
+                {
+                    "name": "text",
+                    "type": "string",
+                    "description": "The text to print"
+                }
+            ],
+            "returns": [],
+            "example": "print(\"Hello, World!\")"
+        },
+        {
+            "name": "write",
+            "signature": "write(text: string): nil",
+            "description": "Writes text to the console without a newline.",
+            "parameters": [
+                {
+                    "name": "text",
+                    "type": "string",
+                    "description": "The text to write"
+                }
+            ],
+            "returns": [],
+            "example": "write(\"Hello \")\nwrite(\"World\")"
+        }
+    ]
+}

@@ -109,6 +109,8 @@ func main() {
 	// Where we can both read and write to it.
 	stream := jsonrpc2.NewStream(&stdioConn{})
 
+	InitCompletionList()
+
 	// we create a new LSP server in which we pass our handler logger and stream.
 	// Note that our handler object here is an instance of a procotol.Server that has a logger attached to it.
 	// This means that any method that the server can sent is already set up due to the protocol.Server struct.
