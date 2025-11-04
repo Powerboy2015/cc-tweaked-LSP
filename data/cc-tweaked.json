@@ -18,21 +18,21 @@
                         }
                     ],
                     "returns": [],
-                    "example":"monitor.setTextScale(1.5)\nprint(\"Text scale set to 1.5\")"
+                    "example": "monitor.setTextScale(1.5)\nprint(\"Text scale set to 1.5\")"
                 },
                 {
-                    "name":"getTextScale",
-                    "signature":"monitor.getTextScale(): number",
-                    "description":"Gets the current text scale of the monitor.",
+                    "name": "getTextScale",
+                    "signature": "monitor.getTextScale(): number",
+                    "description": "Gets the current text scale of the monitor.",
                     "parameters": [],
                     "returns": [
                         {
-                            "name":"scale",
-                            "type":"number",
-                            "description":"The current text scale"
+                            "name": "scale",
+                            "type": "number",
+                            "description": "The current text scale"
                         }
                     ],
-                    "example":"local scale = monitor.getTextScale()\nprint(\"Current text scale: \" .. scale)"
+                    "example": "local scale = monitor.getTextScale()\nprint(\"Current text scale: \" .. scale)"
                 },
                 {
                     "name": "write",
@@ -162,76 +162,76 @@
                     "parameters": [],
                     "returns": [],
                     "example": "monitor.clearLine()"
-                }, 
+                },
                 {
-                    "name":"getTextColour",
-                    "signature":"monitor.getTextColour(): number",
-                    "description":"Return the colour that new text will be written as.",
+                    "name": "getTextColour",
+                    "signature": "monitor.getTextColour(): number",
+                    "description": "Return the colour that new text will be written as.",
                     "parameters": [],
                     "returns": [
                         {
-                            "name":"colour",
-                            "type":"number",
-                            "description":"The current text colour"
+                            "name": "colour",
+                            "type": "number",
+                            "description": "The current text colour"
                         }
                     ],
-                    "example":"local colour = monitor.getTextColour()\nprint(\"Current text colour: \" .. colour)"
+                    "example": "local colour = monitor.getTextColour()\nprint(\"Current text colour: \" .. colour)"
                 },
                 {
-                    "name":"setTextColour",
-                    "signature":"monitor.setTextColour(colour: number): nil",
-                    "description":"Set the colour that new text will be written as.",
+                    "name": "setTextColour",
+                    "signature": "monitor.setTextColour(colour: number): nil",
+                    "description": "Set the colour that new text will be written as.",
                     "parameters": [
                         {
-                            "name":"colour",
-                            "type":"number",
-                            "description":"The text colour to set"
+                            "name": "colour",
+                            "type": "number",
+                            "description": "The text colour to set"
                         }
                     ],
                     "returns": [],
-                    "example":"monitor.setTextColour(32768)  -- Set text colour to blue"
+                    "example": "monitor.setTextColour(32768)  -- Set text colour to blue"
                 },
                 {
-                    "name":"getBackgroundColour",
-                    "signature":"monitor.getBackgroundColour(): number",
-                    "description":"Return the current background colour. This is used when writing text and clearing the terminal.",
+                    "name": "getBackgroundColour",
+                    "signature": "monitor.getBackgroundColour(): number",
+                    "description": "Return the current background colour. This is used when writing text and clearing the terminal.",
                     "parameters": [],
                     "returns": [
                         {
-                            "name":"colour",
-                            "type":"number",
-                            "description":"The current background colour"
+                            "name": "colour",
+                            "type": "number",
+                            "description": "The current background colour"
                         }
                     ],
-                    "example":"local colour = monitor.getBackgroundColour()\nprint(\"Current background colour: \" .. colour)"
+                    "example": "local colour = monitor.getBackgroundColour()\nprint(\"Current background colour: \" .. colour)"
                 },
                 {
-                    "name":"setBackgroundColour",
-                    "signature":"monitor.setBackgroundColour(colour: number): nil",
-                    "description":"Set the current background colour. This is used when writing text and clearing the terminal.",
+                    "name": "setBackgroundColour",
+                    "signature": "monitor.setBackgroundColour(colour: number): nil",
+                    "description": "Set the current background colour. This is used when writing text and clearing the terminal.",
                     "parameters": [
                         {
-                            "name":"colour",
-                            "type":"number",
-                            "description":"The background colour to set"
+                            "name": "colour",
+                            "type": "number",
+                            "description": "The background colour to set"
                         }
                     ],
                     "returns": [],
-                    "example":"monitor.setBackgroundColour(16384)  -- Set background colour to green"
+                    "example": "monitor.setBackgroundColour(16384)  -- Set background colour to green"
                 },
                 {
-                    "name":"isColour",
-                    "signature":"monitor.isColour(): boolean",
-                    "description":"Determine if this terminal supports colour. Terminals which do not support colour will still allow writing coloured text/backgrounds, but it will be displayed in greyscale.",
+                    "name": "isColour",
+                    "signature": "monitor.isColour(): boolean",
+                    "description": "Determine if this terminal supports colour. Terminals which do not support colour will still allow writing coloured text/backgrounds, but it will be displayed in greyscale.",
                     "parameters": [],
                     "returns": [
                         {
-                            "name":"colour",
-                            "type":"boolean",
-                            "description":"true if the monitor supports colour, false otherwise"
+                            "name": "colour",
+                            "type": "boolean",
+                            "description": "true if the monitor supports colour, false otherwise"
                         }
                     ],
-                    "example":"if monitor.isColour() then\n  print(\"Monitor supports colour\")\nelse\n  print(\"Monitor is monochrome\")\nend"
+                    "example": "if monitor.isColour() then\n  print(\"Monitor supports colour\")\nelse\n  print(\"Monitor is monochrome\")\nend"
                 },
                 {
                     "name": "isColour",
@@ -332,6 +332,1003 @@
                 }
             ]
         },
+        {
+            "name": "printer",
+            "kind": "module",
+            "description": "The printer peripheral for printing text and graphics.",
+            "documentation": "Provides functions for:\n- Printing text to pages\n- Managing cursor position\n- Handling ink and paper levels\n- Creating and finalizing pages",
+            "functions": [
+                {
+                    "name": "write",
+                    "signature": "printer.write(text: string): nil",
+                    "description": "Writes text to the current page.",
+                    "parameters": [
+                        {
+                            "name": "text",
+                            "type": "string",
+                            "description": "The value to write to the page."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.write(\"text\")"
+                },
+                {
+                    "name": "getCursorPos",
+                    "signature": "printer.getCursorPos(): number, number",
+                    "description": "Returns the current position of the cursor on the page.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The X position of the cursor."
+                        },
+                        {
+                            "name": "value2",
+                            "type": "number",
+                            "description": "The Y position of the cursor."
+                        }
+                    ],
+                    "example": "printer.getCursorPos()"
+                },
+                {
+                    "name": "setCursorPos",
+                    "signature": "printer.setCursorPos(x: number, y: number): nil",
+                    "description": "Sets the position of the cursor on the page.",
+                    "parameters": [
+                        {
+                            "name": "x",
+                            "type": "number",
+                            "description": "The X coordinate to set the cursor at."
+                        },
+                        {
+                            "name": "y",
+                            "type": "number",
+                            "description": "The Y coordinate to set the cursor at."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.setCursorPos(1, 1)"
+                },
+                {
+                    "name": "getPageSize",
+                    "signature": "printer.getPageSize(): number, number",
+                    "description": "Returns the size of the current page.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The width of the page."
+                        },
+                        {
+                            "name": "value2",
+                            "type": "number",
+                            "description": "The height of the page."
+                        }
+                    ],
+                    "example": "printer.getPageSize()"
+                },
+                {
+                    "name": "newPage",
+                    "signature": "printer.newPage(): boolean",
+                    "description": "Starts printing a new page.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether a new page could be started."
+                        }
+                    ],
+                    "example": "printer.newPage()"
+                },
+                {
+                    "name": "endPage",
+                    "signature": "printer.endPage(): boolean",
+                    "description": "Finalizes printing of the current page and outputs it to the tray.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether the page could be successfully finished."
+                        }
+                    ],
+                    "example": "printer.endPage()"
+                },
+                {
+                    "name": "setPageTitle",
+                    "signature": "printer.setPageTitle(title: string?): nil",
+                    "description": "Sets the title of the current page.",
+                    "parameters": [
+                        {
+                            "name": "title",
+                            "type": "string",
+                            "description": "?  The title to set for the page.",
+                            "optional": true
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.setPageTitle(\"text\")"
+                },
+                {
+                    "name": "getInkLevel",
+                    "signature": "printer.getInkLevel(): number",
+                    "description": "Returns the amount of ink left in the printer.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The amount of ink available to print with."
+                        }
+                    ],
+                    "example": "printer.getInkLevel()"
+                },
+                {
+                    "name": "getPaperLevel",
+                    "signature": "printer.getPaperLevel(): number",
+                    "description": "Returns the amount of paper left in the printer.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The amount of paper available to print with."
+                        }
+                    ],
+                    "example": "printer.getPaperLevel()"
+                }
+            ]
+        },
+        {
+            "name": "modem",
+            "kind": "module",
+            "description": "Modems allow you to send messages between computers over long distances.",
+            "documentation": "Provides functions for:\n- connecting to other modems\n- transmitting messages\n- calling methods\n- geting names",
+            "functions": [
+                {
+                    "name": "open",
+                    "signature": "modem.open(channel: number): nil",
+                    "description": "Open a channel on a modem. A channel must be open in order to receive messages. Modems can have up to 128\nchannels open at one time.",
+                    "parameters": [
+                        {
+                            "name": "channel",
+                            "type": "number",
+                            "description": "The channel to open. This must be a number between 0 and 65535."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.open(1)"
+                },
+                {
+                    "name": "isOpen",
+                    "signature": "modem.isOpen(channel: number): boolean",
+                    "description": "Check if a channel is open.",
+                    "parameters": [
+                        {
+                            "name": "channel",
+                            "type": "number",
+                            "description": "The channel to check."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether the channel is open."
+                        }
+                    ],
+                    "example": "printer.isOpen(1)"
+                },
+                {
+                    "name": "close",
+                    "signature": "modem.close(channel: number): nil",
+                    "description": "Close an open channel, meaning it will no longer receive messages.",
+                    "parameters": [
+                        {
+                            "name": "channel",
+                            "type": "number",
+                            "description": "The channel to close."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.close(1)"
+                },
+                {
+                    "name": "closeAll",
+                    "signature": "modem.closeAll(): nil",
+                    "description": "Close all open channels.",
+                    "parameters": [],
+                    "returns": [],
+                    "example": "printer.closeAll()"
+                },
+                {
+                    "name": "transmit",
+                    "signature": "modem.transmit(channel: number, replyChannel: number, payload: any): nil",
+                    "description": "Sends a modem message on a certain channel. Modems listening on the channel will queue a modem_message\nevent on adjacent computers.",
+                    "parameters": [
+                        {
+                            "name": "channel",
+                            "type": "number",
+                            "description": "The channel to send messages on."
+                        },
+                        {
+                            "name": "replyChannel",
+                            "type": "number",
+                            "description": "The channel that responses to this message should be sent on. This can be the same as\nchannel or entirely different. The channel must have been opened on\nthe sending computer in order to receive the replies."
+                        },
+                        {
+                            "name": "payload",
+                            "type": "any",
+                            "description": "The object to send. This can be any primitive type (boolean, number, string) as well as\ntables. Other types (like functions), as well as metatables, will not be transmitted."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.transmit(1, 1, value)"
+                },
+                {
+                    "name": "isWireless",
+                    "signature": "modem.isWireless(): boolean",
+                    "description": "Determine if this is a wired or wireless modem.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "true if this is a wireless modem."
+                        }
+                    ],
+                    "example": "printer.isWireless()"
+                },
+                {
+                    "name": "getNamesRemote",
+                    "signature": "modem.getNamesRemote(): string",
+                    "description": "List all remote peripherals on the wired network.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "{ ... } Remote peripheral names on the network."
+                        }
+                    ],
+                    "example": "printer.getNamesRemote()"
+                },
+                {
+                    "name": "isPresentRemote",
+                    "signature": "modem.isPresentRemote(name: string): boolean",
+                    "description": "Determine if a peripheral is available on this wired network.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The peripheral's name."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "boolean If a peripheral is present with the given name."
+                        }
+                    ],
+                    "example": "printer.isPresentRemote(\"text\")"
+                },
+                {
+                    "name": "getTypeRemote",
+                    "signature": "modem.getTypeRemote(name: string): string",
+                    "description": "Get the type of a peripheral is available on this wired network.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The peripheral's name."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "| nil The peripheral's type, or nil if it is not present."
+                        }
+                    ],
+                    "example": "printer.getTypeRemote(\"text\")"
+                },
+                {
+                    "name": "hasTypeRemote",
+                    "signature": "modem.hasTypeRemote(name: string, type: string): boolean",
+                    "description": "Check a peripheral is of a particular type.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The peripheral's name."
+                        },
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "description": "The type to check."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "| nil If a peripheral has a particular type, or nil if it is not present."
+                        }
+                    ],
+                    "example": "printer.hasTypeRemote(\"text\", \"text\")"
+                },
+                {
+                    "name": "getMethodsRemote",
+                    "signature": "modem.getMethodsRemote(name: string): string",
+                    "description": "Get all available methods for the remote peripheral with the given name.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The peripheral's name."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "{ ... } | nil A list of methods provided by this peripheral, or nil if it is not present."
+                        }
+                    ],
+                    "example": "printer.getMethodsRemote(\"text\")"
+                },
+                {
+                    "name": "callRemote",
+                    "signature": "modem.callRemote(remoteName: string, method: string): string",
+                    "description": "Call a method on a peripheral on this wired network.",
+                    "parameters": [
+                        {
+                            "name": "remoteName",
+                            "type": "string",
+                            "description": "The name of the peripheral to invoke the method on."
+                        },
+                        {
+                            "name": "method",
+                            "type": "string",
+                            "description": "The name of the method"
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "The return values of the peripheral method."
+                        }
+                    ],
+                    "example": "printer.callRemote(\"text\", \"text\")"
+                },
+                {
+                    "name": "getNameLocal",
+                    "signature": "modem.getNameLocal(): string",
+                    "description": "Returns the network name of the current computer, if the modem is on. This\nmay be used by other computers on the network to wrap this computer as a\nperipheral.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "| nil The current computer's name on the wired network."
+                        }
+                    ],
+                    "example": "printer.getNameLocal()"
+                }
+            ]
+        },
+        {
+            "name": "drive",
+            "kind": "module",
+            "description": "Disk drives are a peripheral which allow you to read and write to floppy disks and other mountable media (such as computers or turtles). They also allow you to play records.",
+            "documentation": "Provides functions for:\n- reading disks\n- playing audio\n- setting data\n- creating disks",
+            "functions": [
+                {
+                    "name": "isDiskPresent",
+                    "signature": "drive.isDiskPresent(): boolean",
+                    "description": "Returns whether a disk is currently inserted in the drive.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether a disk is currently inserted in the drive."
+                        }
+                    ],
+                    "example": "printer.isDiskPresent()"
+                },
+                {
+                    "name": "getDiskLabel",
+                    "signature": "drive.getDiskLabel(): string",
+                    "description": "Returns the label of the disk in the drive if available.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "| nil The label of the disk, or nil if either no disk is inserted or the disk doesn't have a label."
+                        }
+                    ],
+                    "example": "printer.getDiskLabel()"
+                },
+                {
+                    "name": "setDiskLabel",
+                    "signature": "drive.setDiskLabel(label: string?): nil",
+                    "description": "Sets or clears the label for a disk.",
+                    "parameters": [
+                        {
+                            "name": "label",
+                            "type": "string",
+                            "description": "?  The new label of the disk, or nil to clear.",
+                            "optional": true
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.setDiskLabel(\"text\")"
+                },
+                {
+                    "name": "hasData",
+                    "signature": "drive.hasData(): boolean",
+                    "description": "Returns whether a disk with data is inserted.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether a disk with data is inserted."
+                        }
+                    ],
+                    "example": "printer.hasData()"
+                },
+                {
+                    "name": "getMountPath",
+                    "signature": "drive.getMountPath(): string",
+                    "description": "Returns the mount path for the inserted disk.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "| nil The mount path for the disk, or nil if no data disk is inserted."
+                        }
+                    ],
+                    "example": "printer.getMountPath()"
+                },
+                {
+                    "name": "hasAudio",
+                    "signature": "drive.hasAudio(): boolean",
+                    "description": "Returns whether a disk with audio is inserted.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether a disk with audio is inserted."
+                        }
+                    ],
+                    "example": "printer.hasAudio()"
+                },
+                {
+                    "name": "getAudioTitle",
+                    "signature": "drive.getAudioTitle(): string",
+                    "description": "Returns the title of the inserted audio disk.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "| nil | false The title of the audio, false if no disk is inserted, or nil if the disk has no audio."
+                        }
+                    ],
+                    "example": "printer.getAudioTitle()"
+                },
+                {
+                    "name": "playAudio",
+                    "signature": "drive.playAudio(): nil",
+                    "description": "Plays the audio in the inserted disk, if available.",
+                    "parameters": [],
+                    "returns": [],
+                    "example": "printer.playAudio()"
+                },
+                {
+                    "name": "stopAudio",
+                    "signature": "drive.stopAudio(): nil",
+                    "description": "Stops any audio that may be playing.",
+                    "parameters": [],
+                    "returns": [],
+                    "example": "printer.stopAudio()"
+                },
+                {
+                    "name": "ejectDisk",
+                    "signature": "drive.ejectDisk(): nil",
+                    "description": "Ejects any disk that may be in the drive.",
+                    "parameters": [],
+                    "returns": [],
+                    "example": "printer.ejectDisk()"
+                },
+                {
+                    "name": "getDiskID",
+                    "signature": "drive.getDiskID(): number",
+                    "description": "Returns the ID of the disk inserted in the drive.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "| nil The ID of the disk in the drive, or nil if no disk with an ID is inserted."
+                        }
+                    ],
+                    "example": "printer.getDiskID()"
+                }
+            ]
+        },
+        {
+            "name": "command",
+            "kind": "module",
+            "description": "This peripheral allows you to interact with command blocks.",
+            "documentation": "Provides functions for:\n- interacting with command blocks",
+            "functions": [
+                {
+                    "name": "getCommand",
+                    "signature": "command.getCommand(): string",
+                    "description": "Get the command this command block will run.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "The current command."
+                        }
+                    ],
+                    "example": "printer.getCommand()"
+                },
+                {
+                    "name": "setCommand",
+                    "signature": "command.setCommand(command: string): nil",
+                    "description": "Set the command block's command.",
+                    "parameters": [
+                        {
+                            "name": "command",
+                            "type": "string",
+                            "description": "The new command."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.setCommand(\"text\")"
+                },
+                {
+                    "name": "runCommand",
+                    "signature": "command.runCommand(): boolean, string",
+                    "description": "Execute the command block once.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "If the command completed successfully."
+                        },
+                        {
+                            "name": "value2",
+                            "type": "string",
+                            "description": "| nil A failure message."
+                        }
+                    ],
+                    "example": "printer.runCommand()"
+                }
+            ]
+        },
+        {
+            "name": "redstone_relay",
+            "kind": "module",
+            "description": "The redstone relay is a peripheral that allows reading and outputting redstone signals.",
+            "documentation": "Provides functions for:\n- getting input\n- setting signal strenght\n- cable inputs\n- testing inputs",
+            "functions": [
+                {
+                    "name": "setOutput",
+                    "signature": "redstone_relay.setOutput(side: string, on: boolean): nil",
+                    "description": "Turn the redstone signal of a specific side on or off.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to set."
+                        },
+                        {
+                            "name": "on",
+                            "type": "boolean",
+                            "description": "Whether the redstone signal should be on or off. When on, a signal strength of 15 is emitted."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.setOutput(\"text\", true)"
+                },
+                {
+                    "name": "getOutput",
+                    "signature": "redstone_relay.getOutput(side: string): boolean",
+                    "description": "Get the current redstone output of a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to get."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether the redstone output is on or off."
+                        }
+                    ],
+                    "example": "printer.getOutput(\"text\")"
+                },
+                {
+                    "name": "getInput",
+                    "signature": "redstone_relay.getInput(side: string): boolean",
+                    "description": "Get the current redstone input of a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to get."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether the redstone input is on or off."
+                        }
+                    ],
+                    "example": "printer.getInput(\"text\")"
+                },
+                {
+                    "name": "setAnalogOutput",
+                    "signature": "redstone_relay.setAnalogOutput(side: string, value: number): nil",
+                    "description": "Set the redstone signal strength for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to set."
+                        },
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "description": "The signal strength between 0 and 15."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.setAnalogOutput(\"text\", 1)"
+                },
+                {
+                    "name": "setAnalogueOutput",
+                    "signature": "redstone_relay.setAnalogueOutput(side: string, value: number): nil",
+                    "description": "Set the redstone signal strength for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to set."
+                        },
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "description": "The signal strength between 0 and 15."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.setAnalogueOutput(\"text\", 1)"
+                },
+                {
+                    "name": "getAnalogOutput",
+                    "signature": "redstone_relay.getAnalogOutput(side: string): number",
+                    "description": "Get the redstone output signal strength for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to get."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The output signal strength, between 0 and 15."
+                        }
+                    ],
+                    "example": "printer.getAnalogOutput(\"text\")"
+                },
+                {
+                    "name": "getAnalogueOutput",
+                    "signature": "redstone_relay.getAnalogueOutput(side: string): number",
+                    "description": "Get the redstone output signal strength for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to get."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The output signal strength, between 0 and 15."
+                        }
+                    ],
+                    "example": "printer.getAnalogueOutput(\"text\")"
+                },
+                {
+                    "name": "getAnalogInput",
+                    "signature": "redstone_relay.getAnalogInput(side: string): number",
+                    "description": "Get the redstone input signal strength for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to get."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The input signal strength, between 0 and 15."
+                        }
+                    ],
+                    "example": "printer.getAnalogInput(\"text\")"
+                },
+                {
+                    "name": "getAnalogueInput",
+                    "signature": "redstone_relay.getAnalogueInput(side: string): number",
+                    "description": "Get the redstone input signal strength for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to get."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The input signal strength, between 0 and 15."
+                        }
+                    ],
+                    "example": "printer.getAnalogueInput(\"text\")"
+                },
+                {
+                    "name": "setBundledOutput",
+                    "signature": "redstone_relay.setBundledOutput(side: string, output: number): nil",
+                    "description": "Set the bundled cable output for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to set."
+                        },
+                        {
+                            "name": "output",
+                            "type": "number",
+                            "description": "The colour bitmask to set."
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.setBundledOutput(\"text\", 1)"
+                },
+                {
+                    "name": "getBundledOutput",
+                    "signature": "redstone_relay.getBundledOutput(side: string): number",
+                    "description": "Get the bundled cable output for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to get."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The bundle cable's output."
+                        }
+                    ],
+                    "example": "printer.getBundledOutput(\"text\")"
+                },
+                {
+                    "name": "getBundledInput",
+                    "signature": "redstone_relay.getBundledInput(side: string): number",
+                    "description": "Get the bundled cable input for a specific side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to get."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "number",
+                            "description": "The bundle cable's input."
+                        }
+                    ],
+                    "example": "printer.getBundledInput(\"text\")"
+                },
+                {
+                    "name": "testBundledInput",
+                    "signature": "redstone_relay.testBundledInput(side: string, mask: number): boolean",
+                    "description": "Determine if a specific combination of colours are on for the given side.",
+                    "parameters": [
+                        {
+                            "name": "side",
+                            "type": "string",
+                            "description": "The side to test."
+                        },
+                        {
+                            "name": "mask",
+                            "type": "number",
+                            "description": "The mask to test."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "If the colours are on."
+                        }
+                    ],
+                    "example": "printer.testBundledInput(\"text\", 1)"
+                }
+            ]
+        },
+        {
+            "name": "speaker",
+            "kind": "module",
+            "description": "The speaker peripheral allows your computer to play notes and other sounds.",
+            "documentation": "Provides functions for:\n- playing sounds",
+            "functions": [
+                {
+                    "name": "playNote",
+                    "signature": "speaker.playNote(instrument: string, volume: number?, pitch: number?): boolean",
+                    "description": "Plays a note block note through the speaker.",
+                    "parameters": [
+                        {
+                            "name": "instrument",
+                            "type": "string",
+                            "description": "The instrument to use to play this note."
+                        },
+                        {
+                            "name": "volume",
+                            "type": "number",
+                            "description": "?  The volume to play the note at, from 0.0 to 3.0. Defaults to 1.0.",
+                            "optional": true
+                        },
+                        {
+                            "name": "pitch",
+                            "type": "number",
+                            "description": "?  The pitch to play the note at in semitones, from 0 to 24. Defaults to 12.",
+                            "optional": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether the note could be played as the limit was reached."
+                        }
+                    ],
+                    "example": "printer.playNote(\"text\", 1, 1)"
+                },
+                {
+                    "name": "playSound",
+                    "signature": "speaker.playSound(name: string, volume: number?, pitch: number?): boolean",
+                    "description": "Plays a Minecraft sound through the speaker.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The name of the sound to play."
+                        },
+                        {
+                            "name": "volume",
+                            "type": "number",
+                            "description": "?  The volume to play the sound at, from 0.0 to 3.0. Defaults to 1.0.",
+                            "optional": true
+                        },
+                        {
+                            "name": "pitch",
+                            "type": "number",
+                            "description": "?  The speed to play the sound at, from 0.5 to 2.0. Defaults to 1.0.",
+                            "optional": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "Whether the sound could be played."
+                        }
+                    ],
+                    "example": "printer.playSound(\"text\", 1, 1)"
+                },
+                {
+                    "name": "playAudio",
+                    "signature": "speaker.playAudio(audio: number, volume: number?): boolean",
+                    "description": "Attempt to stream some audio data to the speaker.",
+                    "parameters": [
+                        {
+                            "name": "audio",
+                            "type": "number",
+                            "description": "{ ... } A list of amplitudes."
+                        },
+                        {
+                            "name": "volume",
+                            "type": "number",
+                            "description": "?  The volume to play this audio at. If not given, defaults to the previous volume\ngiven to playAudio.",
+                            "optional": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "If there was room to accept this audio data."
+                        }
+                    ],
+                    "example": "printer.playAudio(1, 1)"
+                },
+                {
+                    "name": "stop",
+                    "signature": "speaker.stop(): nil",
+                    "description": "Stop all audio being played by this speaker.",
+                    "parameters": [],
+                    "returns": [],
+                    "example": "printer.stop()"
+                }
+            ]
+        }
+    ],
+    "globals": [
+        {
+            "name": "print",
+            "signature": "print(text: string): nil",
+            "description": "Prints a message to the console with a newline.",
+            "parameters": [
+                {
+                    "name": "text",
+                    "type": "string",
+                    "description": "The text to print"
+                }
+            ],
+            "returns": [],
+            "example": "print(\"Hello, World!\")"
+        },
+        {
+            "name": "write",
+            "signature": "write(text: string): nil",
+            "description": "Writes text to the console without a newline.",
+            "parameters": [
+                {
+                    "name": "text",
+                    "type": "string",
+                    "description": "The text to write"
+                }
+            ],
+            "returns": [],
+            "example": "write(\"Hello \")\nwrite(\"World\")"
+        }
+    ],
+    "global_modules": [
         {
             "name": "term",
             "kind": "module",
@@ -447,36 +1444,198 @@
                     "example": "turtle.back()"
                 }
             ]
-        }
-    ],
-    "globals": [
-        {
-            "name": "print",
-            "signature": "print(text: string): nil",
-            "description": "Prints a message to the console with a newline.",
-            "parameters": [
-                {
-                    "name": "text",
-                    "type": "string",
-                    "description": "The text to print"
-                }
-            ],
-            "returns": [],
-            "example": "print(\"Hello, World!\")"
         },
         {
-            "name": "write",
-            "signature": "write(text: string): nil",
-            "description": "Writes text to the console without a newline.",
-            "parameters": [
+            "name": "peripheral",
+            "kind": "module",
+            "description": "Find and control peripherals attached to this computer.",
+            "documentation": "Provides functions for:\n- finding peripherals\n- geting peripheral types\n- call methods\n- wrap peripherals",
+            "functions": [
                 {
-                    "name": "text",
-                    "type": "string",
-                    "description": "The text to write"
+                    "name": "getNames",
+                    "signature": "peripheral.getNames(): string",
+                    "description": "Provides a list of all peripherals available.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "{ ... } A list of the names of all attached peripherals."
+                        }
+                    ],
+                    "example": "printer.getNames()"
+                },
+                {
+                    "name": "isPresent",
+                    "signature": "peripheral.isPresent(name: string): boolean",
+                    "description": "Determines if a peripheral is present with the given name.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The side or network name that you want to check."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "If a peripheral is present with the given name."
+                        }
+                    ],
+                    "example": "printer.isPresent(\"text\")"
+                },
+                {
+                    "name": "getType",
+                    "signature": "peripheral.getType(peripheral: string): string",
+                    "description": "Get the types of a named or wrapped peripheral.",
+                    "parameters": [
+                        {
+                            "name": "peripheral",
+                            "type": "string",
+                            "description": "| table The name of the peripheral to find, or a\nwrapped peripheral instance."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "... The peripheral's types, or nil if it is not present."
+                        }
+                    ],
+                    "example": "printer.getType(\"text\")"
+                },
+                {
+                    "name": "hasType",
+                    "signature": "peripheral.hasType(peripheral: string, peripheral_type: string): boolean",
+                    "description": "Check if a peripheral is of a particular type.",
+                    "parameters": [
+                        {
+                            "name": "peripheral",
+                            "type": "string",
+                            "description": "| table The name of the peripheral or a wrapped peripheral instance."
+                        },
+                        {
+                            "name": "peripheral_type",
+                            "type": "string",
+                            "description": "The type to check."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "boolean",
+                            "description": "| nil If a peripheral has a particular type, or nil if it is not present."
+                        }
+                    ],
+                    "example": "printer.hasType(\"text\", \"text\")"
+                },
+                {
+                    "name": "getMethods",
+                    "signature": "peripheral.getMethods(name: string): string",
+                    "description": "Get all available methods for the peripheral with the given name.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The name of the peripheral to find."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "{ ... } | nil A list of methods provided by this peripheral, or nil if\nit is not present."
+                        }
+                    ],
+                    "example": "printer.getMethods(\"text\")"
+                },
+                {
+                    "name": "getName",
+                    "signature": "peripheral.getName(peripheral: table): string",
+                    "description": "Get the name of a peripheral wrapped with peripheral.wrap.",
+                    "parameters": [
+                        {
+                            "name": "peripheral",
+                            "type": "table",
+                            "description": "The peripheral to get the name of."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "The name of the given peripheral."
+                        }
+                    ],
+                    "example": "printer.getName(value)"
+                },
+                {
+                    "name": "call",
+                    "signature": "peripheral.call(name: string, method: string): nil",
+                    "description": "Call a method on the peripheral with the given name.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The name of the peripheral to invoke the method on."
+                        },
+                        {
+                            "name": "method",
+                            "type": "string",
+                            "description": "The name of the method"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "printer.call(\"text\", \"text\")"
+                },
+                {
+                    "name": "wrap",
+                    "signature": "peripheral.wrap(name: string): table",
+                    "description": "Get a table containing all functions available on a peripheral. These can\nthen be called instead of using peripheral.call every time.",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The name of the peripheral to wrap."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "table",
+                            "description": "| nil The table containing the peripheral's methods, or nil if\nthere is no peripheral present with the given name."
+                        }
+                    ],
+                    "example": "printer.wrap(\"text\")"
+                },
+                {
+                    "name": "find",
+                    "signature": "peripheral.find(ty: string, filter: string?): table",
+                    "description": "Find all peripherals of a specific type, and return the\nwrapped peripherals.",
+                    "parameters": [
+                        {
+                            "name": "ty",
+                            "type": "string",
+                            "description": "The type of peripheral to look for."
+                        },
+                        {
+                            "name": "filter",
+                            "type": "string",
+                            "description": "? function(name: , wrapped: table):boolean A\nfilter function, which takes the peripheral's name and wrapped table\nand returns if it should be included in the result.",
+                            "optional": true
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "table",
+                            "description": "... 0 or more wrapped peripherals matching the given filters."
+                        }
+                    ],
+                    "example": "printer.find(\"text\", \"text\")"
                 }
-            ],
-            "returns": [],
-            "example": "write(\"Hello \")\nwrite(\"World\")"
+            ]
         }
     ]
 }

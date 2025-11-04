@@ -1,53 +1,19 @@
 import * as vscode from 'vscode';
-import { LanguageClient, LanguageClientOptions, ServerOptions, Executable } from 'vscode-languageclient/node';
 import * as path from 'path';
 
-let client: LanguageClient;
-
 export function activate(context: vscode.ExtensionContext) {
-    // Get configuration
-    const config = vscode.workspace.getConfiguration('ccTweaked');
-    const customServerPath = config.get<string>('serverPath');
+    const defsPath = path.join(context.extensionPath, 'definitions');
     
-    // Determine server executable path
-    let serverExecutable: string;
-    if (customServerPath && customServerPath.trim() !== '') {
-        serverExecutable = customServerPath;
-    } else {
-        // Use bundled server (adjust path based on where you bundle the Go executable)
-        serverExecutable = path.join(context.extensionPath, 'server', 'cc-tweaked-lsp.exe');
+    // Add CC-Tweaked definitions to Lua language server
+    const config = vscode.workspace.getConfiguration('Lua');
+    const library = config.get<string[]>('workspace.library') || [];
+    
+    if (!library.includes(defsPath)) {
+        config.update('workspace.library', [...library, "out", defsPath], 
+            vscode.ConfigurationTarget.Global);
+        
+        vscode.window.showInformationMessage('CC-Tweaked API definitions loaded!');
     }
-
-    const run: Executable = {
-        command: serverExecutable,
-        args: []
-    };
-
-    const serverOptions: ServerOptions = {
-        run,
-        debug: run
-    };
-
-    const clientOptions: LanguageClientOptions = {
-        documentSelector: [{ scheme: 'file', language: 'lua' }],
-        synchronize: {
-            fileEvents: vscode.workspace.createFileSystemWatcher('**/*.lua')
-        }
-    };
-
-    client = new LanguageClient(
-        'ccTweakedLanguageServer',
-        'CC Tweaked Language Server',
-        serverOptions,
-        clientOptions
-    );
-
-    client.start();
 }
 
-export function deactivate(): Thenable<void> | undefined {
-    if (!client) {
-        return undefined;
-    }
-    return client.stop();
-}
+export function deactivate() {}

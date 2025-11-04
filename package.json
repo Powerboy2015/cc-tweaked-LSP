@@ -16,37 +16,13 @@
   "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
+    "compile": "tsc -p ./ && npm run generate-defs",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile"
-  },
-  "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "CC Tweaked",
-      "properties": {
-        "ccTweaked.trace.server": {
-          "scope": "window",
-          "type": "string",
-          "enum": ["off", "messages", "verbose"],
-          "default": "off",
-          "description": "Traces the communication between VS Code and the language server."
-        },
-        "ccTweaked.serverPath": {
-          "scope": "window",
-          "type": "string",
-          "default": "",
-          "description": "Path to the CC Tweaked language server executable. Leave empty to use bundled server."
-        }
-      }
-    }
-  },
-  "dependencies": {
-    "vscode-languageclient": "^8.0.0"
+    "generate-defs": "node out/scripts/generate-definitions.js"
   },
   "devDependencies": {
-    "@types/node": "^16.0.0",
-    "@types/vscode": "^1.60.0",
+    "@types/vscode": "^1.80.0",
+    "@types/node": "16.x",
     "typescript": "^5.0.0"
   }
 }

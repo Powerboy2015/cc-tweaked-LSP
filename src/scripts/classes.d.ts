@@ -1,6 +1,16 @@
+type snippetList = {
+    [key: string]: Snippet
+}
+type Snippet = {
+    prefix: string;
+    body: string;
+    description: string;
+}
+
 type ccDefs ={
     modules: module[];
     globals: FunctionDef[];
+    global_modules: module[];
 }
 
 type module = {
