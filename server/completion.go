@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
 	"strings"
 
 	"go.lsp.dev/protocol"
+	"go.uber.org/zap"
+	"zochi.space/cc-tweaked/utils"
 )
 
 var completionItems = []protocol.CompletionItem{
@@ -34,6 +37,45 @@ var completionItems = []protocol.CompletionItem{
 		Detail:   "the terminal module that is used for all computers in computercraft",
 		SortText: "!term", // Changed to !
 	},
+}
+
+func (h *handler) Completion(ctx context.Context, params *protocol.CompletionParams) (*protocol.CompletionList, error) {
+	h.logger.Info("Completion called", zap.Any("params", params))
+
+	// gets the string data from the current active document.
+	docURI := params.TextDocument.URI
+	content, exists := h.documents[docURI]
+	if !exists {
+		return &protocol.CompletionList{
+			IsIncomplete: false,
+			Items:        []protocol.CompletionItem{},
+		}, nil
+	}
+
+	line := params.Position.Line
+	character := params.Position.Character
+
+	lines := utils.SplitLines(content)
+	if int(line) >= len(lines) {
+		return &protocol.CompletionList{
+			IsIncomplete: false,
+			Items:        []protocol.CompletionItem{},
+		}, nil
+	}
+
+	currentLine := lines[line]
+	if int(character) > len(currentLine) {
+		character = uint32(len(currentLine))
+	}
+	textBeforeCursor := currentLine[:character]
+
+	items := GetCompletionItems(textBeforeCursor)
+
+	return &protocol.CompletionList{
+		IsIncomplete: false,
+		Items:        items,
+	}, nil
+
 }
 
 func GetCompletionItems(text string) []protocol.CompletionItem {

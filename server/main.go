@@ -34,6 +34,7 @@ func (h *handler) Initialize(ctx context.Context, params *protocol.InitializePar
 				TriggerCharacters: []string{".", ":"},
 				ResolveProvider:   false,
 			},
+			HoverProvider: true,
 		},
 		// sends the clients information about the LSP name and version.
 		ServerInfo: &protocol.ServerInfo{
@@ -72,61 +73,6 @@ func (h *handler) DidClose(ctx context.Context, params *protocol.DidCloseTextDoc
 	h.logger.Info("Document closed", zap.String("uri", string(params.TextDocument.URI)))
 	delete(h.documents, params.TextDocument.URI)
 	return nil
-}
-
-func (h *handler) Completion(ctx context.Context, params *protocol.CompletionParams) (*protocol.CompletionList, error) {
-	h.logger.Info("Completion called", zap.Any("params", params))
-
-	// gets the string data from the current active document.
-	docURI := params.TextDocument.URI
-	content, exists := h.documents[docURI]
-	if !exists {
-		return &protocol.CompletionList{
-			IsIncomplete: false,
-			Items:        []protocol.CompletionItem{},
-		}, nil
-	}
-
-	line := params.Position.Line
-	character := params.Position.Character
-
-	lines := splitLines(content)
-	if int(line) >= len(lines) {
-		return &protocol.CompletionList{
-			IsIncomplete: false,
-			Items:        []protocol.CompletionItem{},
-		}, nil
-	}
-
-	currentLine := lines[line]
-	if int(character) > len(currentLine) {
-		character = uint32(len(currentLine))
-	}
-	textBeforeCursor := currentLine[:character]
-
-	items := GetCompletionItems(textBeforeCursor)
-
-	return &protocol.CompletionList{
-		IsIncomplete: false,
-		Items:        items,
-	}, nil
-
-}
-
-// Helper function to split content into lines
-func splitLines(content string) []string {
-	lines := []string{}
-	currentLine := ""
-	for _, ch := range content {
-		if ch == '\n' {
-			lines = append(lines, currentLine)
-			currentLine = ""
-		} else if ch != '\r' {
-			currentLine += string(ch)
-		}
-	}
-	lines = append(lines, currentLine)
-	return lines
 }
 
 // This struct and functions allows us to use os.Stdin and os.Stdout as a jsonrpc2 stream.
