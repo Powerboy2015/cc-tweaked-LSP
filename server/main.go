@@ -69,9 +69,24 @@ func (h *handler) DidChange(ctx context.Context, params *protocol.DidChangeTextD
 	return nil
 }
 
+func (h *handler) DidSave(ctx context.Context, params *protocol.DidSaveTextDocumentParams) error {
+	h.logger.Info("Document saved", zap.String("uri", string(params.TextDocument.URI)))
+	return nil
+}
+
 func (h *handler) DidClose(ctx context.Context, params *protocol.DidCloseTextDocumentParams) error {
 	h.logger.Info("Document closed", zap.String("uri", string(params.TextDocument.URI)))
 	delete(h.documents, params.TextDocument.URI)
+	return nil
+}
+
+func (h *handler) SetTrace(ctx context.Context, params *protocol.SetTraceParams) error {
+	h.logger.Info("SetTrace called", zap.String("value", string(params.Value)))
+	return nil
+}
+
+func (h *handler) DidChangeWatchedFiles(ctx context.Context, params *protocol.DidChangeWatchedFilesParams) error {
+	h.logger.Info("Watched files changed", zap.Int("changes", len(params.Changes)))
 	return nil
 }
 

@@ -12,12 +12,14 @@ import (
 func (h *handler) Hover(ctx context.Context, params *protocol.HoverParams) (*protocol.Hover, error) {
 	h.logger.Info("Hover called", zap.Any("params", params))
 
+	// gets document data
 	docURI := params.TextDocument.URI
 	content, exists := h.documents[docURI]
 	if !exists {
-		return &protocol.Hover{}, nil
+		return nil, nil
 	}
 
+	// Gets current line and character
 	line := params.Position.Line
 	character := params.Position.Character
 	lines := utils.SplitLines(content)
@@ -30,16 +32,17 @@ func (h *handler) Hover(ctx context.Context, params *protocol.HoverParams) (*pro
 		return nil, nil
 	}
 
+	// gets the word at the postion
 	word := getWordAtPosition(currentLine, int(character))
 	if word == "" {
-		return &protocol.Hover{}, nil
+		return nil, nil
 	}
 
 	h.logger.Info("Hover word", zap.String("word", word))
 
 	hoverInfo := getHoverInfo(word)
 	if hoverInfo == nil {
-		return &protocol.Hover{}, nil
+		return nil, nil
 	}
 
 	return hoverInfo, nil
