@@ -1,6 +1,338 @@
 {
     "modules": [
         {
+            "name": "monitor",
+            "kind": "module",
+            "description": "The monitor module for advanced displays in ComputerCraft.",
+            "documentation": "Provides functions for:\n- Writing text to the monitor\n- Clearing the monitor\n- Setting colors\n- Cursor manipulation",
+            "functions": [
+                {
+                    "name": "setTextScale",
+                    "signature": "monitor.setTextScale(scale: number): nil",
+                    "description": "Sets the text scale on the monitor.",
+                    "parameters": [
+                        {
+                            "name": "scale",
+                            "type": "number",
+                            "description": "The text scale (e.g., 0.5, 1, 2)"
+                        }
+                    ],
+                    "returns": [],
+                    "example":"monitor.setTextScale(1.5)\nprint(\"Text scale set to 1.5\")"
+                },
+                {
+                    "name":"getTextScale",
+                    "signature":"monitor.getTextScale(): number",
+                    "description":"Gets the current text scale of the monitor.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name":"scale",
+                            "type":"number",
+                            "description":"The current text scale"
+                        }
+                    ],
+                    "example":"local scale = monitor.getTextScale()\nprint(\"Current text scale: \" .. scale)"
+                },
+                {
+                    "name": "write",
+                    "signature": "monitor.write(text: string): nil",
+                    "description": "Writes text to the monitor.",
+                    "parameters": [
+                        {
+                            "name": "text",
+                            "type": "string",
+                            "description": "The text to write"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "monitor.write(\"Hello, Monitor!\")"
+                },
+                {
+                    "name": "scroll",
+                    "signature": "monitor.scroll(y: number): nil",
+                    "description": "Scrolls the monitor content by the specified number of lines.",
+                    "parameters": [
+                        {
+                            "name": "y",
+                            "type": "number",
+                            "description": "The number of lines to scroll (positive to scroll down, negative to scroll up)"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "monitor.scroll(2)  -- Scrolls down 2 lines"
+                },
+                {
+                    "name": "getCursorPos",
+                    "signature": "monitor.getCursorPos(): number, number",
+                    "description": "Returns the current cursor position as x, y coordinates.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "x",
+                            "type": "number",
+                            "description": "The x coordinate"
+                        },
+                        {
+                            "name": "y",
+                            "type": "number",
+                            "description": "The y coordinate"
+                        }
+                    ],
+                    "example": "local x, y = monitor.getCursorPos()\nprint(\"Cursor at: \" .. x .. \", \" .. y)"
+                },
+                {
+                    "name": "setCursorPos",
+                    "signature": "monitor.setCursorPos(x: number, y: number): nil",
+                    "description": "Sets the cursor position on the monitor.",
+                    "parameters": [
+                        {
+                            "name": "x",
+                            "type": "number",
+                            "description": "The x coordinate (1-based)"
+                        },
+                        {
+                            "name": "y",
+                            "type": "number",
+                            "description": "The y coordinate (1-based)"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "monitor.setCursorPos(1, 1)"
+                },
+                {
+                    "name": "getCursorBlink",
+                    "signature": "monitor.getCursorBlink(): boolean",
+                    "description": "Returns whether the cursor blink is enabled on the monitor.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "blink",
+                            "type": "boolean",
+                            "description": "true if cursor blink is enabled, false otherwise"
+                        }
+                    ],
+                    "example": "local blink = monitor.getCursorBlink()\nprint(\"Cursor blink is \" .. (blink and \"enabled\" or \"disabled\"))"
+                },
+                {
+                    "name": "setCursorBlink",
+                    "signature": "monitor.setCursorBlink(blink: boolean): nil",
+                    "description": "Enables or disables the cursor blink on the monitor.",
+                    "parameters": [
+                        {
+                            "name": "blink",
+                            "type": "boolean",
+                            "description": "true to enable cursor blink, false to disable"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "monitor.setCursorBlink(true)  -- Enable cursor blink"
+                },
+                {
+                    "name": "getSize",
+                    "signature": "monitor.getSize(): number, number",
+                    "description": "Get the size of the terminal.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "width",
+                            "type": "number",
+                            "description": "The width of the terminal"
+                        },
+                        {
+                            "name": "height",
+                            "type": "number",
+                            "description": "The height of the terminal"
+                        }
+                    ],
+                    "example": "local width, height = monitor.getSize()\nprint(\"Monitor size: \" .. width .. \"x\" .. height)"
+                },
+                {
+                    "name": "clear",
+                    "signature": "monitor.clear(): nil",
+                    "description": "Clears the terminal, filling it with the current background colour.",
+                    "parameters": [],
+                    "returns": [],
+                    "example": "monitor.clear()"
+                },
+                {
+                    "name": "clearLine",
+                    "signature": "monitor.clearLine(): nil",
+                    "description": "Clears the current line, filling it with the current background colour.",
+                    "parameters": [],
+                    "returns": [],
+                    "example": "monitor.clearLine()"
+                }, 
+                {
+                    "name":"getTextColour",
+                    "signature":"monitor.getTextColour(): number",
+                    "description":"Return the colour that new text will be written as.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name":"colour",
+                            "type":"number",
+                            "description":"The current text colour"
+                        }
+                    ],
+                    "example":"local colour = monitor.getTextColour()\nprint(\"Current text colour: \" .. colour)"
+                },
+                {
+                    "name":"setTextColour",
+                    "signature":"monitor.setTextColour(colour: number): nil",
+                    "description":"Set the colour that new text will be written as.",
+                    "parameters": [
+                        {
+                            "name":"colour",
+                            "type":"number",
+                            "description":"The text colour to set"
+                        }
+                    ],
+                    "returns": [],
+                    "example":"monitor.setTextColour(32768)  -- Set text colour to blue"
+                },
+                {
+                    "name":"getBackgroundColour",
+                    "signature":"monitor.getBackgroundColour(): number",
+                    "description":"Return the current background colour. This is used when writing text and clearing the terminal.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name":"colour",
+                            "type":"number",
+                            "description":"The current background colour"
+                        }
+                    ],
+                    "example":"local colour = monitor.getBackgroundColour()\nprint(\"Current background colour: \" .. colour)"
+                },
+                {
+                    "name":"setBackgroundColour",
+                    "signature":"monitor.setBackgroundColour(colour: number): nil",
+                    "description":"Set the current background colour. This is used when writing text and clearing the terminal.",
+                    "parameters": [
+                        {
+                            "name":"colour",
+                            "type":"number",
+                            "description":"The background colour to set"
+                        }
+                    ],
+                    "returns": [],
+                    "example":"monitor.setBackgroundColour(16384)  -- Set background colour to green"
+                },
+                {
+                    "name":"isColour",
+                    "signature":"monitor.isColour(): boolean",
+                    "description":"Determine if this terminal supports colour. Terminals which do not support colour will still allow writing coloured text/backgrounds, but it will be displayed in greyscale.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name":"colour",
+                            "type":"boolean",
+                            "description":"true if the monitor supports colour, false otherwise"
+                        }
+                    ],
+                    "example":"if monitor.isColour() then\n  print(\"Monitor supports colour\")\nelse\n  print(\"Monitor is monochrome\")\nend"
+                },
+                {
+                    "name": "isColour",
+                    "signature": "monitor.isColour(): boolean",
+                    "description": "Determine if this terminal supports colour. Terminals which do not support colour will still allow writing coloured text/backgrounds, but it will be displayed in greyscale.",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "colour",
+                            "type": "boolean",
+                            "description": "true if the monitor supports colour, false otherwise"
+                        }
+                    ],
+                    "example": "if monitor.isColour() then\n  print(\"Monitor supports colour\")\nelse\n  print(\"Monitor is monochrome\")\nend"
+                },
+                {
+                    "name": "blit",
+                    "signature": "monitor.blit(text: string, textColour: string, backgroundColour: string): nil",
+                    "description": "Writes text to the monitor with per-character colours.",
+                    "parameters": [
+                        {
+                            "name": "text",
+                            "type": "string",
+                            "description": "The text to write"
+                        },
+                        {
+                            "name": "textColour",
+                            "type": "string",
+                            "description": "A string of hexadecimal digits representing the text colour for each character"
+                        },
+                        {
+                            "name": "backgroundColour",
+                            "type": "string",
+                            "description": "A string of hexadecimal digits representing the background colour for each character"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "monitor.blit(\"Hello\", \"12345\", \"54321\")"
+                },
+                {
+                    "name": "setPaletteColour",
+                    "signature": "monitor.setPaletteColour(colour: number, r: number, g: number, b: number): nil",
+                    "description": "Set the palette for a specific colour.",
+                    "parameters": [
+                        {
+                            "name": "colour",
+                            "type": "number",
+                            "description": "The colour index to set (0-15)"
+                        },
+                        {
+                            "name": "r",
+                            "type": "number",
+                            "description": "Red component (0.0 - 1.0)"
+                        },
+                        {
+                            "name": "g",
+                            "type": "number",
+                            "description": "Green component (0.0 - 1.0)"
+                        },
+                        {
+                            "name": "b",
+                            "type": "number",
+                            "description": "Blue component (0.0 - 1.0)"
+                        }
+                    ],
+                    "returns": [],
+                    "example": "monitor.setPaletteColour(1, 1.0, 0.0, 0.0)  -- Set colour 1 to red"
+                },
+                {
+                    "name": "getPaletteColour",
+                    "signature": "monitor.getPaletteColour(colour: number): number, number, number",
+                    "description": "Get the palette for a specific colour.",
+                    "parameters": [
+                        {
+                            "name": "colour",
+                            "type": "number",
+                            "description": "The colour index to get (0-15)"
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "r",
+                            "type": "number",
+                            "description": "Red component (0.0 - 1.0)"
+                        },
+                        {
+                            "name": "g",
+                            "type": "number",
+                            "description": "Green component (0.0 - 1.0)"
+                        },
+                        {
+                            "name": "b",
+                            "type": "number",
+                            "description": "Blue component (0.0 - 1.0)"
+                        }
+                    ],
+                    "example": "local r, g, b = monitor.getPaletteColour(1)\nprint(\"Colour 1 RGB: \" .. r .. \", \" .. g .. \", \" .. b)"
+                }
+            ]
+        },
+        {
             "name": "term",
             "kind": "module",
             "description": "The terminal module for all computers in ComputerCraft.",
