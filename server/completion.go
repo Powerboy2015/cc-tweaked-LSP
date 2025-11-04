@@ -8,24 +8,31 @@ import (
 
 var completionItems = []protocol.CompletionItem{
 	{
-		Label:         "print",
-		Kind:          protocol.CompletionItemKindFunction,
-		Detail:        "Prints a message to the console",
-		Documentation: "Use this function to print messages.",
+		Label:            "print",
+		Kind:             protocol.CompletionItemKindFunction,
+		Detail:           "print(text: string): nil",
+		Documentation:    "Prints a message to the console",
+		InsertText:       "print(${1:text})$0",
+		InsertTextFormat: protocol.InsertTextFormatSnippet,
+		SortText:         "!print", // Changed to !
 	},
 	{
 		Label:  "term.print",
 		Kind:   protocol.CompletionItemKindFunction,
-		Detail: "Prints a message to the terminal",
+		Detail: "term.print(text: string): nil",
 		Documentation: &protocol.MarkupContent{
 			Kind:  protocol.Markdown,
-			Value: "Moves the turtle forward one block. Returns `true` if successful, `false` otherwise.",
+			Value: "Prints a message to the terminal.",
 		},
+		InsertText:       "print(${1:text})$0",
+		InsertTextFormat: protocol.InsertTextFormatSnippet,
+		SortText:         "!print", // Changed to ! (this was still "0print")
 	},
 	{
-		Label:  "term",
-		Kind:   protocol.CompletionItemKindModule,
-		Detail: "the terminal module that is used for all computers in computercraft",
+		Label:    "term",
+		Kind:     protocol.CompletionItemKindModule,
+		Detail:   "the terminal module that is used for all computers in computercraft",
+		SortText: "!term", // Changed to !
 	},
 }
 
@@ -57,8 +64,13 @@ func GetCompletionItems(text string) []protocol.CompletionItem {
 
 					if strings.HasPrefix(methodName, partialMethod) {
 						itemCopy := item
-						itemCopy.Label = strings.TrimPrefix(item.Label, prefix)
-						itemCopy.InsertText = strings.TrimPrefix(item.Label, prefix)
+						itemCopy.Label = methodName
+						itemCopy.SortText = "!" + methodName // Changed to !
+
+						if itemCopy.InsertText == "" {
+							itemCopy.InsertText = methodName
+						}
+
 						filtered = append(filtered, itemCopy)
 					}
 				}
@@ -77,10 +89,8 @@ func GetCompletionItems(text string) []protocol.CompletionItem {
 	for _, item := range completionItems {
 		// Only show top-level items (modules and global functions)
 		// Don't show "term.print" when typing "term" - only show "term"
-		if !strings.Contains(item.Label, ".") || strings.HasPrefix(item.Label, trimmed+".") {
-			if strings.HasPrefix(item.Label, trimmed) {
-				filtered = append(filtered, item)
-			}
+		if !strings.Contains(item.Label, ".") && strings.HasPrefix(item.Label, trimmed) {
+			filtered = append(filtered, item)
 		}
 	}
 
