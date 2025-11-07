@@ -10,7 +10,15 @@ type Snippet = {
 type ccDefs ={
     modules: module[];
     globals: FunctionDef[];
-    global_modules: module[];
+    peripherals: module[];
+    types: Type[]
+}
+
+type Type = {
+    name: string;
+    kind: string;
+    description: string;
+    fields: ParameterDef[];
 }
 
 type module = {

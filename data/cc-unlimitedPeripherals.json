@@ -1,0 +1,237 @@
+{
+    "modules": [],
+    "globals": [],
+    "peripherals": [
+        {
+            "name": "AI",
+            "kind": "module",
+            "description": "AI API responsible for controlling entities AI, toggling it and perform checks if it is enabled or disabled.",
+            "functions": [
+                {
+                    "name": "toggleAI",
+                    "signature": "AI.toggleAI(direction?: Direction): Result",
+                    "description": "Tries to toggle AI of entity in specific direction",
+                    "parameters": [
+                        {
+                            "name": "direction",
+                            "type": "'x+'|'x-'|'y+'|'y-'|'z+'|'z-'|nil",
+                            "description": "The name of the peripheral to wrap."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "table|nil",
+                            "description": "table | nil The table containing the peripheral's methods, or nil if\nthere is no peripheral present with the given name."
+                        }
+                    ],
+                    "example": "peripheral.wrap(\"text\")"
+                }
+            ]
+        },
+        {
+            "name": "Capture",
+            "kind": "module",
+            "description": "Capture API allows moving block or entities with storing it internal data! So finally, you can move specific spawners and chests!",
+            "functions": [
+                {
+                    "name": "capture",
+                    "signature": "Capture.capture(mode: InteractionMode,direction: Direction): Result",
+                    "description": "Tries to capture block in specific direction",
+                    "parameters": [
+                        {
+                            "name": "direction",
+                            "type": "'up'|'down'",
+                            "description": "The direction to capture the block from."
+                        },
+                        {
+                            "name": "mode",
+                            "type": "'any'|'block'|'entity'",
+                            "description": "The interaction mode, either 'block' or 'entity'."
+                        }
+                    ],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "table|nil",
+                            "description": "table | nil The table containing the peripheral's methods, or nil if\nthere is no peripheral present with the given name."
+                        }
+                    ],
+                    "example": "Capture.captureBlock(\"z+\", \"block\")"
+                },
+                {
+                    "name": "release",
+                    "signature": "Capture.release(): Result",
+                    "description": "Tiers to release object: create entity or place block",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "Result",
+                            "description": "Result The table containing the peripheral's methods, or nil if\nthere is no peripheral present with the given name."
+                        }
+                    ]
+                },
+                {
+                    "name": "getCaptured",
+                    "kind": "method",
+                    "description": "Returns information about captured entity (including NBT data)",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "table",
+                            "description": "table Returns information about captured entity (including NBT data)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "filterBlock",
+            "kind": "module",
+            "description": "This integration works with most blocks in Create that have a filter component, and it allows you to manipulate this filter from the computer.",
+            "functions": [
+                {
+                    "name": "getFilterName",
+                    "signature": "Filter.getFilterName(): string",
+                    "description": "Returns item ID of current filter",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "string",
+                            "description": "ID of the current filter item"
+                        }
+                    ]
+                },
+                {
+                    "name": "setFilterName",
+                    "signature": "Filter.setFilterName(name: string)",
+                    "description": "Sets the filter to the specified item ID",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "description": "The item ID to set as the filter"
+                        }
+                    ],
+                    "returns": []
+                },
+                {
+                    "name": "clearFilterItem",
+                    "signature": "Filter.clearFilterItem()",
+                    "description": "Clear any filtering",
+                    "parameters": [],
+                    "returns": []
+                }
+            ]
+        },
+        {
+            "name": "recipeRegistry",
+            "kind": "module",
+            "description": "This peripheral exists to provide help in extracting recipes from game and building complex recipe pipelines. It may not work as well as you would expect, but at least this is a start.",
+            "functions": [
+                {
+                    "name": "getRecipeTypes",
+                    "signature": "recipeRegistry.getRecipeTypes(): table",
+                    "description": "Returns list of all recipe types in the game",
+                    "parameters": [],
+                    "returns": [
+                        {
+                            "name": "value1",
+                            "type": "table",
+                            "description": "A table containing all registered recipes."
+                        }
+                    ]
+                },
+                {
+                    "name":"getAllRecipesForType",
+                    "signature":"recipeRegistry.getAllRecipesForType(recipeTypeID: string)",
+                    "description":"Returns all recipes for given recipe type",
+                    "parameters":[
+                        {
+                            "name":"recipeTypeID",
+                            "type":"string",
+                            "description":"The ID of the recipe type to get recipes for."
+                        }
+                    ],
+                    "returns":[
+                        {
+                            "name":"value1",
+                            "type":"table",
+                            "description":"A table containing all recipes for the specified type."
+                        }
+                    ]
+                },
+                {
+                    "name":"getRecipeForType",
+                    "signature": "recipeRegistry.getRecipeForType(recipeTypeID: string, recipeID: string)",
+                    "description":"Returns information about particular recipe",
+                    "parameters":[
+                        {
+                            "name":"recipeTypeID",
+                            "type":"string",
+                            "description":"The ID of the recipe type."
+                        },
+                        {
+                            "name":"recipeID",
+                            "type":"string",
+                            "description":"The ID of the recipe to get."
+                        }
+                    ],
+                    "returns":[
+                        {
+                            "name":"value1",
+                            "type":"table|nil",
+                            "description":"A table containing the recipe information, or nil if the recipe was not found."
+                        }
+                    ]
+                },
+                {
+                    "name":"getRecipesFor",
+                    "signature":"recipeRegistry.getRecipesFor(itemID: string, recipeFilter: RecipeFilter)",
+                    "description":"Returns all recipe for item based on filter",
+                    "parameters":[
+                        {
+                            "name":"itemID",
+                            "type":"string",
+                            "description":"The ID of the item to get recipes for."
+                        },
+                        {
+                            "name":"recipeFilter",
+                            "type":"nil|'*'|string",
+                            "description":"A table containing filter options for the recipes."
+                        }
+                    ],
+                    "returns":[
+                        {
+                            "name":"value1",
+                            "type":"table",
+                            "description":"A table containing all recipes matching the filter for the specified item."
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "types": [
+        {
+            "name": "Result",
+            "kind": "type",
+            "description": "A result type representing success or failure of an operation.",
+            "fields": [
+                {
+                    "name": "success",
+                    "type": "boolean",
+                    "description": "Indicates whether the operation was successful."
+                },
+                {
+                    "name": "message",
+                    "type": "string|nil",
+                    "description": "An optional message providing additional information about the operation."
+                }
+            ]
+        }
+    ]
+}
