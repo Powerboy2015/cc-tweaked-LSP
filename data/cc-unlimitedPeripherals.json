@@ -91,6 +91,7 @@
             "name": "filterBlock",
             "kind": "module",
             "description": "This integration works with most blocks in Create that have a filter component, and it allows you to manipulate this filter from the computer.",
+            "extends": "inventory",
             "functions": [
                 {
                     "name": "getFilterName",
@@ -106,7 +107,7 @@
                     ]
                 },
                 {
-                    "name": "setFilterName",
+                    "name": "setFilterItem",
                     "signature": "Filter.setFilterName(name: string)",
                     "description": "Sets the filter to the specified item ID",
                     "parameters": [

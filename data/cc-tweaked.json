@@ -2404,8 +2404,8 @@
                     "returns": [
                         {
                             "name": "value1",
-                            "type": "table",
-                            "description": "... 0 or more wrapped peripherals matching the given filters."
+                            "type": "table...",
+                            "description": "0 or more wrapped peripherals matching the given filters."
                         }
                     ],
                     "example": "peripheral.find(\"text\", \"text\")"

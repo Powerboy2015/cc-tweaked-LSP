@@ -26,6 +26,7 @@ type module = {
     kind: string;
     description: string;
     documentation: string;
+    extends?: string;
     functions: FunctionDef[];
 }
 

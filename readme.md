@@ -191,6 +191,7 @@ Contributions are welcome! Here's how you can help:
 -   [ ] Add examples for all peripheral types
 -   [ ] Support for custom peripheral APIs
 -   [ ] Integration with CC:Tweaked documentation links
+-   [ ] Continue implementation of unlimitedPeripheralWorks mod
 
 ## License
 

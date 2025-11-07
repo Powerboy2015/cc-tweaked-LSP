@@ -44,7 +44,8 @@ jsonFiles.forEach((file: string) => {
 
         // These are the return types.
         data.peripherals.forEach((mod) => {
-            output += `---@class ${mod.name}\n`;
+            const extender = mod.extends ? ` : ${mod.extends}` : "";
+            output += `---@class ${mod.name}${extender}\n`;
             output += `---${mod.description.replace(/\n/g, " ")}\n`;
             output += `local ${mod.name} = {}\n\n`;
 
