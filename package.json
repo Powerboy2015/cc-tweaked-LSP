@@ -1,28 +1,64 @@
 {
   "name": "vscode-cc-tweaked",
-  "displayName": "CC Tweaked Language Server",
-  "description": "A Visual Studio Code extension for CC Tweaked language support.",
+  "displayName": "CC-Tweaked Language Support",
+  "description": "Language support for CC-Tweaked Lua with autocomplete, hover documentation, and snippets.",
   "version": "0.0.1",
   "publisher": "Zochi",
+  "author": {
+    "name": "Zico Backer"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Powerboy2015/cc-tweaked-LSP"
+  },
+  "bugs": {
+    "url": "https://github.com/Powerboy2015/cc-tweaked-LSP/issues"
+  },
+  "homepage": "https://github.com/Powerboy2015/cc-tweaked-LSP#readme",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.60.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "lua",
+    "cc-tweaked",
+    "computercraft",
+    "minecraft",
+    "autocomplete"
   ],
   "activationEvents": [
     "onLanguage:lua"
   ],
   "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "CC-Tweaked",
+      "properties": {
+        "cc-tweaked.enableAutocomplete": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable CC-Tweaked autocomplete suggestions"
+        }
+      }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./ && npm run generate-defs",
+    "compile": "npm run generate-defs && tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "generate-defs": "node out/scripts/generate-definitions.js"
+    "generate-defs": "node out/scripts/generate-definitions.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "devDependencies": {
     "@types/vscode": "^1.80.0",
     "@types/node": "16.x",
+    "@vscode/vsce": "^2.22.0",
     "typescript": "^5.0.0"
   }
 }
