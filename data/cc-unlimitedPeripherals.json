@@ -141,7 +141,7 @@
                     "returns": [
                         {
                             "name": "value1",
-                            "type": "table",
+                            "type": "Recipe",
                             "description": "A table containing all registered recipes."
                         }
                     ]
@@ -190,8 +190,8 @@
                     ]
                 },
                 {
-                    "name":"getRecipesFor",
-                    "signature":"recipeRegistry.getRecipesFor(itemID: string, recipeFilter: RecipeFilter)",
+                    "name":"search",
+                    "signature":"recipeRegistry.search(itemID: string, types: string)",
                     "description":"Returns all recipe for item based on filter",
                     "parameters":[
                         {
@@ -200,15 +200,15 @@
                             "description":"The ID of the item to get recipes for."
                         },
                         {
-                            "name":"recipeFilter",
-                            "type":"nil|'*'|string",
-                            "description":"A table containing filter options for the recipes."
+                            "name": "types?",
+                            "type": "string",
+                            "description":"type of crafting mechanism."
                         }
                     ],
                     "returns":[
                         {
                             "name":"value1",
-                            "type":"table",
+                            "type":"Recipe[]",
                             "description":"A table containing all recipes matching the filter for the specified item."
                         }
                     ]
@@ -231,6 +231,82 @@
                     "name": "message",
                     "type": "string|nil",
                     "description": "An optional message providing additional information about the operation."
+                }
+            ]
+        },
+        {
+            "name": "Recipe",
+            "kind": "type",
+            "description": "A recipe type representing a crafting recipe in the game.", 
+            "fields": [
+                {
+                    "name":"input",
+                    "type":"RecipeInput[]",
+                    "description":"An list of minecraft items required for the recipe"
+                },
+                {
+                    "name": "type",
+                    "type": "string",
+                    "description": "the crafting type."
+                },
+                {
+                    "name":"id",
+                    "type": "string",
+                    "description": "The ID of the crafting type."
+                },
+                {
+                    "name":"output",
+                    "type":"RecipeOutput[]",
+                    "description":"return item from said recipe."
+                }
+            ]
+        },
+        {
+            "name": "RecipeInput",
+            "kind": "type",
+            "description": "The input object that is part of a recipe",
+            "fields":[
+                {
+                    "name": "item",
+                    "type": "string",
+                    "description":"value of an ItemID"
+                }
+            ]
+        },
+        {
+            "name":"RecipeOutput",
+            "kind":"type",
+            "description": "the output object of a recipeOutput",
+            "fields": [
+                {
+                    "name": "name",
+                    "type":"string",
+                    "description":"the return ItemId"
+                },
+                {
+                    "name":"itemGroups",
+                    "type":"table",
+                    "description":"list of itemgroups, like ores or ingots"
+                },
+                {
+                    "name":"tags",
+                    "type":"table",
+                    "description":"list of tags added to the item"
+                },
+                {
+                    "name":"count",
+                    "type": "number",
+                    "description":"the amount returned from an recipe"
+                },
+                {
+                    "name":"maxCount",
+                    "type":"number",
+                    "description":"the max stack size the item can have"
+                },
+                {
+                    "name":"displayName",
+                    "type":"string",
+                    "description":"the displayname of the item"
                 }
             ]
         }

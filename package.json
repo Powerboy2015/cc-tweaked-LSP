@@ -1,7 +1,7 @@
 {
   "name": "vscode-cc-tweaked",
   "displayName": "CC-Tweaked Language Support",
-  "description": "Language support for CC-Tweaked Lua with autocomplete, hover documentation, and snippets.",
+  "description": "Language support for CC-Tweaked Lua with autocomplete",
   "version": "0.0.1",
   "publisher": "Zochi",
   "author": {
@@ -16,13 +16,12 @@
     "url": "https://github.com/Powerboy2015/cc-tweaked-LSP/issues"
   },
   "homepage": "https://github.com/Powerboy2015/cc-tweaked-LSP#readme",
-  "icon": "icon.png",
+  "icon": "extension/image.png",
   "engines": {
     "vscode": "^1.60.0"
   },
   "categories": [
-    "Programming Languages",
-    "Snippets"
+    "Programming Languages"
   ],
   "keywords": [
     "lua",
@@ -56,7 +55,7 @@
     "publish": "vsce publish"
   },
   "devDependencies": {
-    "@types/vscode": "^1.80.0",
+    "@types/vscode": "^1.60.0",
     "@types/node": "16.x",
     "@vscode/vsce": "^2.22.0",
     "typescript": "^5.0.0"
